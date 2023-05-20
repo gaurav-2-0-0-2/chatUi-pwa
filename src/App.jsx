@@ -6,7 +6,6 @@ function App() {
 
   return (
     <div className="mx-20">
-      <Navbar/>
       <Body/>
     </div>
   )
