@@ -98,21 +98,21 @@ export default function Body() {
                                     fetchedData.map((item) => {
                                         return (
 
-                                            <div key={item.id} className={item.sender.self === true ? `flex px-6 justify-end`: `flex px-6`}>
+                                            <div key={item.id} className={item.sender.self === true ? `flex justify-end md:px-6 px-4`: `flex md:px-6 px-4`}>
                                                 {
                                                     item.sender.self === true ? (
 
                                                         <div className="pl-14">
                                                             {/* <img className="w-[30px] h-[30px] rounded-full" src={item.sender.image} alt="" /> */}
 
-                                                            <h1 className="w-[18.5rem] bg-blue-600 mb-4 p-2 rounded-xl rounded-br-none">{item.message.slice(1, 100)}</h1>
+                                                            <h1 className="md:w-[18.5rem] w-[14rem] bg-blue-600 mb-4 p-2 rounded-xl rounded-br-none">{item.message.slice(1, 100)}</h1>
 
                                                         </div>
 
                                                     ) : (
                                                         <div className="flex gap-2">
                                                             <img className="w-[30px] h-[30px] rounded-full" src={item.sender.image} alt="" />
-                                                            <h1 className="w-[20rem] bg-white mb-4 p-2 rounded-xl rounded-tl-none">{item.message.slice(1, 100)}</h1>
+                                                            <h1 className="md:w-[20rem] w-[14rem] bg-white mb-4 p-2 rounded-xl rounded-tl-none">{item.message.slice(1, 100)}</h1>
                                                         </div>
 
                                                     )
