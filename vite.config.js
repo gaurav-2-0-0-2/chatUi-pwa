@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react(), VitePWA(
     {
       workbox: {
-           globPatterns: ["**/*"],
+        globPatterns: ["**/*"],
       },
       includeAssets: ["**/*"],
       manifest: {
@@ -20,6 +20,17 @@ export default defineConfig({
         scope: "/",
         start_url: "/",
         icons: [
+          {
+            src: "/android-chrome-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "/android-chrome-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+
+          },
           {
             src: "/apple-touch-icon.png",
             sizes: "180x180",
