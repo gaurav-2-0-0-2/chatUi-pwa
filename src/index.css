@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* @media only screen and (min-width: 600px) {
+  body {
+    margin: 20px ;
+  }
+} */
+
+
+/* tip */
+
+.popup::after {
+    content: '';
+    border-width: 7px;
+    border-style: solid;
+    border-color: #22c55e transparent transparent transparent;
+    position: absolute;
+    top: 58px;
+    right: 51px;
+    margin-left: 5%;
+    transform: rotate(90deg);
+}
+
+.popup{
+    display: none;
+    position: absolute;
+    bottom: 1px;
+    right: 22px;
+    transform: rotate(-90deg);
+}
+
+.icon:hover + .popup{
+    display: block;
+     animation: hover-animation 2s forwards;
+}
+
+.popup-icon{
+    margin-top:10px ;
+    margin-bottom:10px ;
+    transform: rotate(90deg);
+}
+
+
+
+
+
+
+
+
