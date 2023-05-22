@@ -1,102 +1,136 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Navbar from "./Navbar";
-import { BiSend } from 'react-icons/bi';
-import { FiPaperclip } from "react-icons/fi";
+import Input from './Input';
+import chatLoading from './chatLoading'
 
-const url = "http://3.111.128.67/assignment/chat?page=0";
+
+// const url = "http://3.111.128.67/assignment/chat?page=0";
 
 export default function Body() {
 
-    const [data, setData] = useState([]);
+    const [fetchedData, setFetchedData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [pageNumber, setPageNumber] = useState(0);
+    const loaderRef = useRef(null);
 
 
+    const fetchData = async (page) => {
 
-
-    const fetchData = async () => {
 
         try {
-            const response = await fetch(url);
+            setIsLoading(true);
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            const response = await fetch(`http://3.111.128.67/assignment/chat?page=${page}`);
             const jsonData = await response.json();
             // console.log(jsonData);
-            setData(jsonData);
-
+            // setFetchedData(jsonData);
+            setFetchedData((prevData) => [...prevData, ...jsonData.chats]);
+            setIsLoading(false);
         } catch (error) {
             console.log(error)
+            setIsLoading(false);
         }
 
+    };
 
-
-
-    }
 
     useEffect(() => {
-        fetchData();
-    }, [])
+        fetchData(pageNumber);
+    }, [pageNumber]);
+
+
+    useEffect(() => {
+        const options = {
+            root: null,
+            rootMargin: "20px",
+            threshold: 1.0,
+        };
+
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setPageNumber((prevPageNumber) => prevPageNumber + 1);
+            }
+        }, options);
+
+        if (loaderRef.current) {
+            observer.observe(loaderRef.current);
+        }
+
+        return () => {
+            if (loaderRef.current) {
+                observer.unobserve(loaderRef.current);
+            }
+        };
+    }, []);
+
 
 
     return (
-        <div>
+        <div style={{backgroundColor: '#FAF9F4'}} className="max-width-[370px]">
 
-            <div>
+            {/* <div>
                 {
-                    data.length != 0 ? (
-                        <Navbar start={data.from} destination={data.to} />
+                    fetchedData.length != 0 ? (
+                        <Navbar start={fetchedData.from} destination={fetchedData.to}/>
                     ) : null
                 }
-            </div>
+            </div> */}
+
+            <Navbar/>
 
 
+               
 
-
-            <div className="overflow-y-scroll h-[35rem] scrollbar-hide px-2">
-                <div className="flex justify-between mb-10">
-
-                    <hr className="border-t-4 w-[35%] mt-2 border-gray-300" />
-                    <div className="text-gray-300">20 May,2023</div>
-                    <hr className="border-t-4 w-[35%] mt-2 border-gray-300" />
+            <div className="overflow-y-scroll h-[33rem] scrollbar-hide">
+                <div className="flex justify-between mb-7 mt-20 md:mt-10 px-6">
+                    <hr className="border-t-2 w-[35%] mt-3 border-gray-200" />
+                    <div className="text-gray-200">20 May,2023</div>
+                    <hr className="border-t-2 w-[35%] mt-3 border-gray-200" />
                 </div>
 
                 {/* Chats Area  */}
 
                 <div>
                     {
-                        data.length != 0 ? (
+                        fetchedData.length != 0 ? (
                             <div>
                                 {
-                                    data.chats.map((item) => {
+                                    fetchedData.map((item) => {
                                         return (
-                                            <div key={item.id} className="flex">
-                                                <img className="w-[30px] h-[30px] rounded-full" src={item.sender.image} alt="" />
-                                                <h1 className=" bg-cyan-300 mb-4">{item.message}</h1>
+
+                                            <div key={item.id} className={item.sender.self === true ? `flex px-6 justify-end`: `flex px-6`}>
+                                                {
+                                                    item.sender.self === true ? (
+
+                                                        <div className="pl-14">
+                                                            {/* <img className="w-[30px] h-[30px] rounded-full" src={item.sender.image} alt="" /> */}
+
+                                                            <h1 className="w-[18.5rem] bg-blue-600 mb-4 p-2 rounded-xl rounded-br-none">{item.message.slice(1, 100)}</h1>
+
+                                                        </div>
+
+                                                    ) : (
+                                                        <div className="flex gap-2">
+                                                            <img className="w-[30px] h-[30px] rounded-full" src={item.sender.image} alt="" />
+                                                            <h1 className="w-[20rem] bg-white mb-4 p-2 rounded-xl rounded-tl-none">{item.message.slice(1, 100)}</h1>
+                                                        </div>
+
+                                                    )
+                                                }
+
                                             </div>
+
                                         )
                                     })
                                 }
                             </div>
-                        ) : (
-                            <h1>Loading...</h1>
-                        )
-                    }
+                        ) : null}
                 </div>
+                {isLoading && <p className="text-3xl text-center text-red-500">Chats are Loading...</p>}
+                <div ref={loaderRef} />
             </div>
 
-            <div className=" relative">
-                <input className=" outline-none bg-slate-100 w-full py-2 px-2" type="text" placeholder="Reply"/>
-                <div className="flex gap-5 absolute top-3 right-5">
-                    <FiPaperclip size={20}/>
-                    <BiSend size={20}/>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
+            <Input />
         </div>
     )
 }
