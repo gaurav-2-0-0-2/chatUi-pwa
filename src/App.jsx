@@ -5,7 +5,7 @@ import Navbar from "./component/Navbar";
 function App() {
 
   return (
-    <div className="mx-20">
+    <div>
       <Body/>
     </div>
   )
