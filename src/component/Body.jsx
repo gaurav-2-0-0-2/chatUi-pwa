@@ -82,7 +82,7 @@ export default function Body() {
                
 
             <div className="overflow-y-scroll h-[33rem] scrollbar-hide">
-                <div className="flex justify-between mb-7 mt-20 md:mt-10 px-6">
+                <div className=" min-w-[350px] flex justify-between mb-7 mt-20 md:mt-10 px-6">
                     <hr className="border-t-2 w-[35%] mt-3 border-gray-200" />
                     <div className="text-gray-200">20 May,2023</div>
                     <hr className="border-t-2 w-[35%] mt-3 border-gray-200" />
