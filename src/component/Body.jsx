@@ -12,6 +12,7 @@ export default function Body() {
     const [isLoading, setIsLoading] = useState(false);
     const [pageNumber, setPageNumber] = useState(0);
     const loaderRef = useRef(null);
+    const containerRef = useRef(null); 
 
 
     const fetchData = async (page) => {
@@ -41,7 +42,7 @@ export default function Body() {
 
     useEffect(() => {
         const options = {
-            root: null,
+            root: containerRef.current,
             rootMargin: "20px",
             threshold: 1.0,
         };
@@ -81,7 +82,7 @@ export default function Body() {
 
                
 
-            <div className="overflow-y-scroll h-[33rem] scrollbar-hide">
+            <div className="overflow-y-scroll h-[33rem] scrollbar-hide" ref={containerRef}>
                 <div className=" flex justify-between mb-7 mt-20 md:mt-10 px-6">
                     <hr className="border-t-2 w-[20%] md:w-[35%] mt-3 border-gray-200" />
                     <div className="text-gray-200">20 May,2023</div>
