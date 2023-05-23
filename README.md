@@ -13,7 +13,7 @@ Relaod the application and it will now show you the data.<br><br>
 To make the application working in your browser paste this ```"chrome://flags/#unsafely-treat-insecure-origin-as-secure"``` 
 in search bar and hit enter. On this page search for secure and enable these two settings:<br>
 [i] **Insecure origins treated as secure** and add "http://3.111.128.67/assignment/chat?page=0" in the input box and enable it.<br>
-[ii] **Allow invalid certificates for resources loaded from localhost** and enable it.<br>
+[ii] **Allow invalid certificates for resources loaded from localhost** and enable it and Relaunch it.<br>
 Now you can also install the application as an android app or a desktop app because it is a PWA.<br><br><br>
 *Note: Disable these settings after you have tested the application*
 
