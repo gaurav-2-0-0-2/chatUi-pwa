@@ -1,5 +1,5 @@
 # chatUi-pwa
-## There are two ways to test/check this project
+## There are two ways to test/check this project:
 1. You can go to live version of this project by clicking this [link](https://chat-ui-pwa.vercel.app/).<br>
 Or just paste this url in your search bar "https://chat-ui-pwa.vercel.app/"<br><br>
 
