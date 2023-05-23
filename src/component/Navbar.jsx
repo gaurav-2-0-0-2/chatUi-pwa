@@ -7,7 +7,7 @@ import pic from '../assets/pic.png'
 export default function Navbar() {
     return (
         <div>
-            <div className='px-6'>
+            <div className='px-6 pt-4 md:pt-2'>
                 <section className='flex flex-row justify-between'>
                     <div className='flex gap-4'>
                         <BsArrowLeft size={25} className='mt-1 md:w-[25px] md:mt-0' />
