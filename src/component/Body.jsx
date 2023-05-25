@@ -21,7 +21,7 @@ export default function Body() {
         try {
             setIsLoading(true);
             await new Promise((resolve) => setTimeout(resolve, 1000));
-            const response = await fetch(`http://3.111.128.67/assignment/chat?page=${page}`);
+            const response = await fetch(`https://3.111.128.67/assignment/chat?page=${page}`);
             const jsonData = await response.json();
             // console.log(jsonData);
             // setFetchedData(jsonData);
